@@ -18,6 +18,7 @@ apiVersion: apps/v1
            image: nginx
            ports:
            - containerPort: 80
+           - containerPort: 443
            envFrom:
            - configMapRef:
                name: app-config
@@ -30,6 +31,10 @@ apiVersion: apps/v1
    spec:
      ports:
      - port: 80
+       targetPort: 80
+       protocol: TCP
+     - port: 443
+       targetPort: 443
        protocol: TCP
      selector:
        app: app2
