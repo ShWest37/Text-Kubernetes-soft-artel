@@ -29,7 +29,8 @@
        - files/deployment-app2.yaml
        - files/ingress.yaml
        - files/nfs-pv.yaml
-       - files/nfs-pvc.yaml
+       - files/nfs-pvc-app1.yaml
+       - files/nfs-pvc-app2.yaml
        - files/endpoints.yaml
 
    - name: Apply Kubernetes manifests
