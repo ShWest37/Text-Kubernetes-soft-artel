@@ -6,11 +6,11 @@ apiVersion: v1
      type: nfs
    spec:
      capacity:
-       storage: 1Gi
+       storage: 2Gi
      accessModes:
        - ReadWriteMany
      nfs:
        server: <nfs-server-ip>
        path: "/mnt/nfs_share"
-       persistentVolumeReclaimPolicy: Retain  # Политика persistentVolumeReclaimPolicy установлена на Retain, что означает, что данные будут сохранены после удаления PVC.
+       persistentVolumeReclaimPolicy: Retain 
    ---
