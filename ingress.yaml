@@ -4,10 +4,11 @@
      name: api-ingress
      namespace: api
      annotations:
-       nginx.ingress.kubernetes.io/rewrite-target: /
+       nginx.ingress.kubernetes.io/ssl-redirect: "false"  # Установлено в false, чтобы отключить обязательный HTTPS, что упрощает развертывание на локальном компьютере.
+       nginx.ingress.kubernetes.io/rewrite-target: /  
    spec:
      rules:
-     - host: example.com
+     - host: localhost
        http:
          paths:
          - path: /app1
