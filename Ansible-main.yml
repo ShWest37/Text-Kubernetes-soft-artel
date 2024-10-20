@@ -1,0 +1,46 @@
+   ---
+   - name: Update and upgrade apt packages
+     apt:
+       update_cache: yes
+       upgrade: dist
+
+   - name: Install Docker
+     apt:
+       name: docker.io
+       state: present
+
+   - name: Install Kubernetes packages
+     apt:
+       name: "{{ item }}"
+       state: present
+     loop:
+       - kubelet
+       - kubeadm
+       - kubectl
+
+   - name: Copy Kubernetes manifests
+     copy:
+       src: "{{ item }}"
+       dest: /home/aleks/artel/
+     loop:
+       - files/namespace.yaml
+       - files/configmap.yaml
+       - files/deployment-app1.yaml
+       - files/deployment-app2.yaml
+       - files/ingress.yaml
+       - files/nfs-pv.yaml
+       - files/nfs-pvc.yaml
+       - files/endpoints.yaml
+
+   - name: Apply Kubernetes manifests
+     shell: |
+       kubectl apply -f /home/aleks/artel/{{ item }}
+     loop:
+       - namespace.yaml
+       - configmap.yaml
+       - deployment-app1.yaml
+       - deployment-app2.yaml
+       - ingress.yaml
+       - nfs-pv.yaml
+       - nfs-pvc.yaml
+       - endpoints.yaml
